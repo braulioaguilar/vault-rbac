@@ -1,23 +1,23 @@
 version: '3.5'
-services: 
+services:
   vault:
     image: $IMAGE
     container_name: $CONTAINER_NAME
-    ports: 
+    ports:
       - $PORT:$PORT
     restart: on-failure
-    volumes: 
+    volumes:
       - ./vault/file:/vault/file
       - ./vault/config:/vault/config
       - ./vault/policies:/vault/policies
       - .vault/data:/vault/data
-    environment: 
+    environment:
       - VAULT_ADDR=$VAULT_ADDR
       - VAULT_API_ADDR=$VAULT_API_ADDR
       - VAULT_ADDRESS=$VAULT_ADDRESS
-    cap_add: 
+    cap_add:
       - IPC_LOCK
     command: vault server -config=/vault/config/vault.json
-networks: 
+networks:
   default:
     name: $NETWORKS
